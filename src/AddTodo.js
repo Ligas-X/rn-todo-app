@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   TextInput,
   Text,
   View,
+  Alert,
   TouchableOpacity,
 } from "react-native";
 
 export const AddTodo = ({ onSubmit }) => {
+  const [value, setValue] = useState("");
+
   const pressHandler = () => {
-    onSubmit("Test todo");
+    if (value.trim()) {
+      onSubmit(value);
+      setValue("");
+    } else {
+      Alert.alert("Название дела не может быть пустым!");
+    }
   };
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.textInput} />
+      <TextInput
+        style={styles.textInput}
+        onChangeText={(text) => setValue(text)}
+        value={value}
+        placeholder="Введите название дела"
+      />
       <TouchableOpacity style={styles.button} onPress={pressHandler}>
         <Text style={styles.buttonText}>Добавить</Text>
       </TouchableOpacity>
