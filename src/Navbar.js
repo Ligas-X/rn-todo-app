@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export const Navbar = (props) => {
+export const Navbar = ({ title }) => {
   return (
     <View style={styles.navbar}>
-      <Text style={styles.text}>Todo App</Text>
+      <Text style={styles.navbarText}>{title}</Text>
     </View>
   );
 };
@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
     height: 70,
     alignItems: "center",
     justifyContent: "flex-end",
-    backgroundColor: "#3949AB",
+    backgroundColor: "#0C69F3",
     paddingBottom: 10,
   },
-  text: {
+  navbarText: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
