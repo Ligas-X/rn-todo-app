@@ -16,7 +16,7 @@ export const AddTodo = ({ onSubmit }) => {
       onSubmit(value);
       setValue("");
     } else {
-      Alert.alert("Название дела не может быть пустым!");
+      Alert.alert("Название задачи не может быть пустым!");
     }
   };
 
@@ -26,7 +26,7 @@ export const AddTodo = ({ onSubmit }) => {
         style={styles.textInput}
         onChangeText={(text) => setValue(text)}
         value={value}
-        placeholder="Введите название дела"
+        placeholder="Введите название задачи"
       />
       <TouchableOpacity style={styles.button} onPress={pressHandler}>
         <Text style={styles.buttonText}>Добавить</Text>
