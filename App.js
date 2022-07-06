@@ -29,6 +29,10 @@ export default function App() {
     ]);
   };
 
+  const removeTodo = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style="light" />
@@ -38,7 +42,9 @@ export default function App() {
         <FlatList
           keyExtractor={(item) => item.id.toString()}
           data={todos}
-          renderItem={({ item }) => <Todo todoParam={item} />}
+          renderItem={({ item }) => (
+            <Todo todoParam={item} onRemove={removeTodo} />
+          )}
         />
       </SafeAreaView>
     </View>
