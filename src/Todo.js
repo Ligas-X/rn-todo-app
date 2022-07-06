@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
-export const Todo = ({ todoParam, onRemove }) => {
+export const Todo = ({ todoParam, onRemove, navigation }) => {
   const longPressHandler = () => {
     onRemove(todoParam.id);
   };
@@ -9,7 +9,10 @@ export const Todo = ({ todoParam, onRemove }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.5}
-      onPress={() => console.log("Pressed: ", todoParam.id)}
+      onPress={() => {
+        console.log("Pressed: ", todoParam.id);
+        navigation.navigate("EditTodo", todoParam);
+      }}
       onLongPress={() => {
         Alert.alert("Удаление задачи", "Вы точно хотите удалить задачу?", [
           {
@@ -34,10 +37,11 @@ const styles = StyleSheet.create({
   todoElement: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 12,
-    borderWidth: 1,
-    borderColor: "#eee",
+    backgroundColor: "#ebebeb",
+    borderColor: "#cacaca",
     borderRadius: 8,
+    borderWidth: 1,
+    padding: 12,
     margin: 4,
   },
 });
