@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, FlatList, SafeAreaView } from "react-native";
 import { AddTodo } from "./src/AddTodo";
 import { Todo } from "./src/Todo";
 
-export default function Main({ navigation }) {
+export default function Main({ navigation, route }) {
   const [todos, setTodos] = useState([
     { id: 1, title: "Купить хлеб" },
     { id: 2, title: "Купить молоко" },
@@ -31,6 +31,36 @@ export default function Main({ navigation }) {
   const removeTodo = (id) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
+
+  const updateTodo = (todoId, updatedTitle) => {
+    const newTodo = todos.map((object) => {
+      if (object.id === todoId) {
+        return { ...object, title: updatedTitle };
+      }
+      return object;
+    });
+
+    setTodos(newTodo);
+  };
+
+  React.useEffect(() => {
+    if (route.params?.text) {
+      console.log("Received data for update: ");
+      console.log(" - ID: ", route.params.id);
+      console.log(" - Title: ", route.params.text, "\n");
+
+      updateTodo(route.params.id, route.params.text);
+    }
+  }, [route.params?.text]);
+
+  React.useEffect(() => {
+    if (route.params?.todoIdToDelete) {
+      console.log("Received data for delete: ");
+      console.log(" - ID: ", route.params.todoIdToDelete, "\n");
+
+      removeTodo(route.params.todoIdToDelete);
+    }
+  }, [route.params?.todoIdToDelete]);
 
   return (
     <View style={{ flex: 1 }}>

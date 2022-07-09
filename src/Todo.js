@@ -10,20 +10,29 @@ export const Todo = ({ todoParam, onRemove, navigation }) => {
     <TouchableOpacity
       activeOpacity={0.5}
       onPress={() => {
-        console.log("Pressed: ", todoParam.id);
-        navigation.navigate("EditTodo", todoParam);
+        console.log(
+          "Pressed Todo with ID -",
+          todoParam.id,
+          "and Title -",
+          todoParam.title
+        );
+        navigation.navigate("EditTodo", todoParam, onRemove);
       }}
       onLongPress={() => {
-        Alert.alert("Удаление задачи", "Вы точно хотите удалить задачу?", [
-          {
-            text: "Отмена",
-            style: "cancel",
-          },
-          {
-            text: "Да",
-            onPress: () => longPressHandler(),
-          },
-        ]);
+        Alert.alert(
+          "Удаление задачи",
+          "Вы точно хотите удалить данную задачу?",
+          [
+            {
+              text: "Отмена",
+              style: "cancel",
+            },
+            {
+              text: "Да",
+              onPress: () => longPressHandler(),
+            },
+          ]
+        );
       }}
     >
       <View style={styles.todoElement}>
