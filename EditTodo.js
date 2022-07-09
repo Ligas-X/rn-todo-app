@@ -15,6 +15,8 @@ export default function EditTodo({ navigation, route }) {
           style={styles.textInput}
           onChangeText={setText}
           value={text}
+          multiline={true}
+          numberOfLines={10}
         />
       </SafeAreaView>
     </View>
