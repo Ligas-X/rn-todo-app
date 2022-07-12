@@ -16,7 +16,10 @@ export const AddTodo = ({ onSubmit }) => {
       onSubmit(value);
       setValue("");
     } else {
-      Alert.alert("Название задачи не может быть пустым!");
+      Alert.alert(
+        "Не указано название задачи",
+        "Название задачи не может быть пустым!"
+      );
     }
   };
 
@@ -27,6 +30,7 @@ export const AddTodo = ({ onSubmit }) => {
         onChangeText={(text) => setValue(text)}
         value={value}
         placeholder="Введите название задачи"
+        maxLength={60}
       />
       <TouchableOpacity style={styles.button} onPress={pressHandler}>
         <Text style={styles.buttonText}>Добавить</Text>
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
     width: 120,
     padding: 10,
     borderRadius: 8,
-    borderColor: "white",
+    borderColor: "#0C69F3",
     borderWidth: 2,
     alignItems: "center",
   },

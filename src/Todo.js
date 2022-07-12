@@ -1,7 +1,10 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Alert, StyleSheet, TouchableOpacity } from "react-native";
+import Checkbox from "expo-checkbox";
 
 export const Todo = ({ todoParam, onRemove, navigation }) => {
+  const [isChecked, setChecked] = useState(false);
+
   const longPressHandler = () => {
     onRemove(todoParam.id);
   };
@@ -36,7 +39,13 @@ export const Todo = ({ todoParam, onRemove, navigation }) => {
       }}
     >
       <View style={styles.todoElement}>
-        <Text>{todoParam.title}</Text>
+        <Text numberOfLines={1}>{todoParam.title}</Text>
+        <Checkbox
+          style={styles.checkbox}
+          value={isChecked}
+          onValueChange={setChecked}
+          color={isChecked ? "#0C69F3" : undefined}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -52,5 +61,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 12,
     margin: 4,
+  },
+  checkbox: {
+    position: "absolute",
+    right: 0,
+    marginHorizontal: 12,
   },
 });

@@ -6,8 +6,10 @@ import {
   Alert,
   Text,
   View,
+  Keyboard,
   SafeAreaView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 export default function EditTodo({ navigation, route }) {
@@ -23,72 +25,74 @@ export default function EditTodo({ navigation, route }) {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <SafeAreaView>
-        <Text style={styles.text}>ID of todo: {route.params.id}</Text>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={setText}
-          value={text}
-          multiline={true}
-          numberOfLines={10}
-        />
-        <View style={styles.buttonsView}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              Alert.alert(
-                "Обновление задачи",
-                "Вы точно хотите обновить текст данной задачи?",
-                [
-                  {
-                    text: "Отмена",
-                    style: "cancel",
-                  },
-                  {
-                    text: "Да",
-                    onPress: () => {
-                      navigation.navigate({
-                        name: "Main",
-                        params: { id: todoId, text: text },
-                        merge: true,
-                      });
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <SafeAreaView>
+          <Text style={styles.text}>ID of todo: {route.params.id}</Text>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={setText}
+            value={text}
+            multiline={true}
+            maxLength={120}
+          />
+          <View style={styles.buttonsView}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                Alert.alert(
+                  "Обновление задачи",
+                  "Вы точно хотите обновить текст данной задачи?",
+                  [
+                    {
+                      text: "Отмена",
+                      style: "cancel",
                     },
-                  },
-                ]
-              );
-            }}
-          >
-            <Text style={styles.buttonText}>Обновить</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              Alert.alert(
-                "Удаление задачи",
-                "Вы точно хотите удалить данную задачу?",
-                [
-                  {
-                    text: "Отмена",
-                    style: "cancel",
-                  },
-                  {
-                    text: "Да",
-                    onPress: () => {
-                      navigation.navigate({
-                        name: "Main",
-                        params: { todoIdToDelete: todoId },
-                        merge: true,
-                      });
+                    {
+                      text: "Да",
+                      onPress: () => {
+                        navigation.navigate({
+                          name: "Main",
+                          params: { id: todoId, text: text },
+                          merge: true,
+                        });
+                      },
                     },
-                  },
-                ]
-              );
-            }}
-          >
-            <Text style={styles.buttonText}>Удалить</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+                  ]
+                );
+              }}
+            >
+              <Text style={styles.buttonText}>Обновить</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                Alert.alert(
+                  "Удаление задачи",
+                  "Вы точно хотите удалить данную задачу?",
+                  [
+                    {
+                      text: "Отмена",
+                      style: "cancel",
+                    },
+                    {
+                      text: "Да",
+                      onPress: () => {
+                        navigation.navigate({
+                          name: "Main",
+                          params: { todoIdToDelete: todoId },
+                          merge: true,
+                        });
+                      },
+                    },
+                  ]
+                );
+              }}
+            >
+              <Text style={styles.buttonText}>Удалить</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </TouchableWithoutFeedback>
     </View>
   );
 }
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 2,
     borderRadius: 8,
-    borderColor: "white",
+    borderColor: "#0C69F3",
     marginHorizontal: "2%",
     marginBottom: 12,
     minWidth: "46%",
