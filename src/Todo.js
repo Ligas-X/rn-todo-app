@@ -36,7 +36,7 @@ export const Todo = ({ todoParam, onRemove, navigation }) => {
       }}
     >
       <View style={styles.todoElement}>
-        <Text>{todoParam.title}</Text>
+        <Text numberOfLines={1}>{todoParam.title}</Text>
       </View>
     </TouchableOpacity>
   );
